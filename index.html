@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style>
+    .overlay {
+      /*background-image: url(https://i.gifer.com/ZHum.gif);*/
+      /*background-image: url(https://i.gifer.com/3QAe.gif);*/
+      /*background-image: url(https://i.gifer.com/7S3j.gif);*/
+      /*background-image: url(https://i.gifer.com/ZRSm.gif);*/
+      /*background-image: url(https://i.gifer.com/CTM.gif);*/
+      /*background-image: url(https://i.gifer.com/VJC.gif);*/
+      /*background-image: url(https://i.gifer.com/H2HT.gif);*/
+      /*background-image: url(https://i.gifer.com/slt.gif);*/
+      /*background-image: url(https://i.gifer.com/S5Db.gif);*/
+      /*background-image: url(https://i.gifer.com/ySG.gif);*/
+      /*background-image: url(https://i.gifer.com/g0eI.gif);*/
+      /*background-image: url(https://i.gifer.com/t7.gif);*/
+      /*background-image: url(https://i.gifer.com/7S3H.gif);*/
+      /*background-image: url(https://i.gifer.com/GeoX.gif);*/
+      background-image: url(https://i.gifer.com/g0eI.gif);
+
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 19;
+      transition-duration: 2s;
+      transition-delay: 0s, 1s;
+
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      /*background: yellow;*/
+    }
+
+    .slide1 {
+      background-image: url("images/s1_2.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 16;
+    }
+
+    .slide2 {
+    . slide;
+      background-image: url("images/s2.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 15;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .slide6 {
+      background-image: url('images/sunduk_puzzle.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: fixed;
+      margin: auto;
+      top: 0;
+      width: 50vw;
+      height: 50vh;
+      z-index: 14;
+      text-align: center;
+    }
+
+    .slide-puzzle {
+      display: block;
+      margin: auto auto;
+      width: 50%;
+      height: 50%;
+    }
+
+    .slide3 {
+      background-image: url("images/qs.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 14;
+    }
+
+    .next {
+      position: fixed;
+      bottom: 0;
+      width: 100vw;
+      text-align: center;
+      z-index: 20;
+      /*display: flex;*/
+    }
+
+    .hidden {
+      display: none;
+      opacity: 0.3;
+    }
+
+    .keys {
+      position: fixed;
+      top: 0;
+      right: 0;
+      display: flex;
+      width: 10%;
+      height: 10%;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<div id='app'>
+  <div class="slides">
+    <div class="slide">
+      <div class="slide1">
+        1
+      </div>
+    </div>
+    <div class="next">
+      <!--      <button onclick="changeSlide(slide1)">ДАЛІ</button>-->
+      <button class="nextSlide">ДАЛІ</button>
+
+    </div>
+    <div class="slide">
+      <div class="slide2">
+        2
+        <!--        <div v-for="q in questions.s6">-->
+        <!--          {{q.question}}-->
+        <!--          <label>-->
+        <!--            <input-->
+        <!--                    type="checkbox"-->
+        <!--                    v-for="a in q.allAnswers"-->
+        <!--                    v-model="answers"-->
+        <!--                    value="a.value"-->
+        <!--                    @change="func"-->
+        <!--            >{{a.title}}</label>-->
+        <!--        </div>-->
+      </div>
+    </div>
+    <div class="slide">
+      <!--      <div class="slide6">-->
+      6
+      <img src='images/sunduk_puzzle.png' class="slide-puzzle">
+      <!--        </div>-->
+    </div>
+
+    <div class="overlay hidden">
+    </div>
+    <div class="slide">
+      <div class="slide3">
+        11
+        <p>
+          <label>Чи допоможе фінансова автономія залучити кошти із різних джерел?</label>
+          <br>
+          <label>
+            <input type="radio" name="status" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
+            Так
+          </label>
+          <label>
+            <input type="radio" name="status" value="No" onClick="if(this.checked) CheckRadio('slide3',0);">
+            Ні
+          </label>
+          <label>
+            <input type="radio" name="status" value="nknow" onClick="if(this.checked) CheckRadio('slide3',0);">
+            Не знаю
+          </label>
+        </p>
+      </div>
+    </div>
+    <div class="keys">KEYS
+      <keys foundKeys="foundKeys"></keys>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/keys.js"></script>
+<script>
+  let numberSlide = 1;
+  const tempSlide = document.querySelector('.nextSlide');
+  console.log(tempSlide);
+  tempSlide.onclick = function () {
+    changeSlide(tempSlide);
+    numberSlide++;
+  };
+
+  function changeSlide(slide) {
+    const tempSlide = document.querySelector(".slide" + numberSlide);
+    // console.log(tempSlide);
+    tempSlide.classList.add('hidden');
+    const overlay = document.querySelector(".overlay");
+    overlay.classList.remove('hidden');
+    overlay.animate({opacity: "0.1"}, 2000);
+    setTimeout(() => overlay.classList.add('hidden'), 2000);
+  }
+
+  let result = 0;
+  let boolrez = false;
+
+  function CheckRadio(adress, value) {
+    boolrez = (value === 1);
+    result = value;
+    rezultat(adress);
+  }
+
+  function rez() {
+    return result > 0;
+  }
+
+  function rezultat(adress) {
+    if (rez() === true) {
+      console.log("ok");
+      console.log(result);
+      console.log(boolrez);
+      console.log(numberSlide);
+      changeSlide(adress)
+    } else {
+      console.log("no");
+      console.log(result);
+      console.log(boolrez)
+    }
+  }
+
+  // new Vue({
+  //   el: '#app',
+  //   data() {
+  //     return {
+  //       foundKeys: 0,
+  //       answers: [],
+  //       questions : {
+  //         s6: [
+  //           {
+  //             question: "Чи допоможе автономия",
+  //             correctAnswers: [1, 2, 3],
+  //             allAnswers: [
+  //               {
+  //                 title: 'Так',
+  //                 value: 1
+  //               }
+  //             ]
+  //           },
+  //           {
+  //             question: " question 22222",
+  //             correctAnswers: [1, 2, 3],
+  //             allAnswers: [
+  //               {
+  //                 title: 'Так',
+  //                 value: 1
+  //               }
+  //             ]
+  //           },
+  //         ]
+  //       },
+  //     }
+  //   },
+  //   methods: {
+  //     func() {
+  //
+  //       foundKeys++
+  //     }
+  //   }
+  // })
+
+</script>
+</body>
+</html>
+
