@@ -2,6 +2,7 @@
 <html>
 <head>
   <title></title>
+
   <style>
     .overlay {
       /*background-image: url(https://i.gifer.com/ZHum.gif);*/
@@ -40,7 +41,7 @@
       /*background: yellow;*/
     }
 
-    .slide1 {
+    .slide-11 {
       background-image: url("images/s1_2.png");
       background-size: cover;
       background-repeat: no-repeat;
@@ -50,36 +51,49 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: 16;
+      /*z-index: 2;*/
     }
 
-    .slide2 {
-    . slide;
-      background-image: url("images/s2.png");
+    .slide-12 {
+      background-image: url("images/s1_2.png");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 15;
       width: 100vw;
       height: 100vh;
+      /*z-index: 2;*/
     }
 
-    .slide6 {
-      background-image: url('images/sunduk_puzzle.png');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      position: fixed;
-      margin: auto;
-      top: 0;
-      width: 50vw;
-      height: 50vh;
-      z-index: 14;
-      text-align: center;
-    }
+    /*.slide2 {*/
+    /*. slide;*/
+    /*  background-image: url("images/s2.png");*/
+    /*  background-size: cover;*/
+    /*  background-repeat: no-repeat;*/
+    /*  background-position: center;*/
+    /*  position: fixed;*/
+    /*  top: 0;*/
+    /*  left: 0;*/
+    /*  z-index: 15;*/
+    /*  width: 100vw;*/
+    /*  height: 100vh;*/
+    /*}*/
+
+    /*.slide6 {*/
+    /*  background-image: url('images/sunduk_puzzle.png');*/
+    /*  background-size: cover;*/
+    /*  background-repeat: no-repeat;*/
+    /*  background-position: center;*/
+    /*  position: fixed;*/
+    /*  margin: auto;*/
+    /*  top: 0;*/
+    /*  width: 50vw;*/
+    /*  height: 50vh;*/
+    /*  z-index: 14;*/
+    /*  text-align: center;*/
+    /*}*/
 
     .slide-puzzle {
       display: block;
@@ -88,18 +102,18 @@
       height: 50%;
     }
 
-    .slide3 {
-      background-image: url("images/qs.png");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 14;
-    }
+    /*.slide3 {*/
+    /*  background-image: url("images/qs.png");*/
+    /*  background-size: cover;*/
+    /*  background-repeat: no-repeat;*/
+    /*  background-position: center;*/
+    /*  position: fixed;*/
+    /*  top: 0;*/
+    /*  left: 0;*/
+    /*  width: 100vw;*/
+    /*  height: 100vh;*/
+    /*  z-index: 14;*/
+    /*}*/
 
     .next {
       position: fixed;
@@ -122,8 +136,32 @@
       display: flex;
       width: 10%;
       height: 10%;
+      z-index: 10;
+    }
+
+    .admin-school {
+      display: flex;
+      margin: 0 auto;
+      width: 500px;
+      height: 50px;
+      background: black;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fire2 {
+      color: #fff;
+      text-shadow: 0 0 2px #eee,
+      0 0 4px #fff,
+      0 -2px 4px #ff3,
+      2px -4px 6px #fd3,
+      -2px -6px 11px #f80,
+      2px -8px 18px #f20;
+      font-size: 20px;
     }
   </style>
+  <link rel="stylesheet/less" href="./style.less"/>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
@@ -131,7 +169,7 @@
 <div id='app'>
   <div class="slides">
     <div class="slide">
-      <div class="slide1">
+      <div class="slide-1">
         1
       </div>
     </div>
@@ -140,23 +178,101 @@
       <button class="nextSlide">ДАЛІ</button>
 
     </div>
-    <div class="slide">
-      <div class="slide2">
-        2
-        <!--        <div v-for="q in questions.s6">-->
-        <!--          {{q.question}}-->
-        <!--          <label>-->
-        <!--            <input-->
-        <!--                    type="checkbox"-->
-        <!--                    v-for="a in q.allAnswers"-->
-        <!--                    v-model="answers"-->
-        <!--                    value="a.value"-->
-        <!--                    @change="func"-->
-        <!--            >{{a.title}}</label>-->
-        <!--        </div>-->
-      </div>
+    <!--    <div class="slide">-->
+    <div class="slide-2">
+      2
+      <!--        <div v-for="q in questions.s6">-->
+      <!--          {{q.question}}-->
+      <!--          <label>-->
+      <!--            <input-->
+      <!--                    type="checkbox"-->
+      <!--                    v-for="a in q.allAnswers"-->
+      <!--                    v-model="answers"-->
+      <!--                    value="a.value"-->
+      <!--                    @change="func"-->
+      <!--            >{{a.title}}</label>-->
+      <!--        </div>-->
     </div>
-    <div class="slide">
+    <!--    </div>-->
+    <div class="slide-3">
+      3 Начальниця управління освіти, у якої в голові питання
+    </div>
+    <div class="slide-4">
+      4
+    </div>
+    <div class="slide-5">
+      5
+    </div>
+    <div class="slide-6">
+      6
+    </div>
+    <div class="slide-7">
+      7
+    </div>
+    <div class="slide-8">
+      8
+    </div>
+    <div class="slide-9">
+      9
+    </div>
+    <div class="slide-10">
+      10
+    </div>
+    <div class="slide-11">
+      11
+      <div class="admin-school">
+        <img src="https://i.gifer.com/BRDH.gif" height="50px">
+        <h1 class="fire2">АДМІНІСТРАЦІЯ ШКОЛИ</h1>
+        <img src="https://i.gifer.com/BRDH.gif" height="50px">
+      </div>
+      <br>
+      <p>
+        <label>Чи допоможе фінансова автономія залучити кошти із різних джерел?</label>
+        <br>
+        <label>
+          <input type="radio" name="status" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
+          Так
+        </label>
+        <label>
+          <input type="radio" name="status" value="No" onClick="if(this.checked) CheckRadio('slide3',0);">
+          Ні
+        </label>
+        <label>
+          <input type="radio" name="status" value="nknow" onClick="if(this.checked) CheckRadio('slide3',0);">
+          Не знаю
+        </label>
+      </p>
+      <p>
+        <label>Чи допоможе фінансова автономія залучити кошти із різних джерел?</label>
+        <br>
+        <label>
+          <input type="checkbox" class="status2" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
+          сформувати стратегію розвитку школи на 3-5 років
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" class="status2" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
+          провести конкурс до піклувальних (наглядових) рад
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" class="status2" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
+          налагодити спілкування із громадою
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" class="status2" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
+          розказувати про діяльність школи
+        </label>
+      </p>
+    </div>
+    <div class="slide-12">
+      12
+    </div>
+    <div class="slide-13">
+      13
+    </div>
+    <div class="slide6">
       <!--      <div class="slide6">-->
       6
       <img src='images/sunduk_puzzle.png' class="slide-puzzle">
@@ -168,43 +284,32 @@
     <div class="slide">
       <div class="slide3">
         11
-        <p>
-          <label>Чи допоможе фінансова автономія залучити кошти із різних джерел?</label>
-          <br>
-          <label>
-            <input type="radio" name="status" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
-            Так
-          </label>
-          <label>
-            <input type="radio" name="status" value="No" onClick="if(this.checked) CheckRadio('slide3',0);">
-            Ні
-          </label>
-          <label>
-            <input type="radio" name="status" value="nknow" onClick="if(this.checked) CheckRadio('slide3',0);">
-            Не знаю
-          </label>
-        </p>
+
       </div>
     </div>
-    <div class="keys">KEYS
-      <keys foundKeys="foundKeys"></keys>
-    </div>
 
+  </div>
+  <div class="keys" id="key">
+    <keys :foundkeys="howFoundKeys"></keys>
   </div>
 </div>
 
 <script src="js/keys.js"></script>
 <script>
+  let found = 0;
   let numberSlide = 1;
   const tempSlide = document.querySelector('.nextSlide');
   console.log(tempSlide);
   tempSlide.onclick = function () {
     changeSlide(tempSlide);
+
+    console.log("number slide " + found);
+    t.func();
     numberSlide++;
   };
 
   function changeSlide(slide) {
-    const tempSlide = document.querySelector(".slide" + numberSlide);
+    const tempSlide = document.querySelector(".slide-" + numberSlide);
     // console.log(tempSlide);
     tempSlide.classList.add('hidden');
     const overlay = document.querySelector(".overlay");
@@ -215,15 +320,26 @@
 
   let result = 0;
   let boolrez = false;
+  let rightAnswers = 5;
 
   function CheckRadio(adress, value) {
+    let st2 = document.querySelectorAll('.status2');
+
+    for (let i = 0; i < st2.length; i++) {
+
+      st2[i].addEventListener('change', function () {
+        if (this.checked) {
+          console.log('checked')
+        } else console.log('unchecked')
+      });
+    }
     boolrez = (value === 1);
-    result = value;
+    result += value;
     rezultat(adress);
   }
 
   function rez() {
-    return result > 0;
+    return result === rightAnswers;
   }
 
   function rezultat(adress) {
@@ -240,45 +356,52 @@
     }
   }
 
-  // new Vue({
-  //   el: '#app',
-  //   data() {
-  //     return {
-  //       foundKeys: 0,
-  //       answers: [],
-  //       questions : {
-  //         s6: [
-  //           {
-  //             question: "Чи допоможе автономия",
-  //             correctAnswers: [1, 2, 3],
-  //             allAnswers: [
-  //               {
-  //                 title: 'Так',
-  //                 value: 1
-  //               }
-  //             ]
-  //           },
-  //           {
-  //             question: " question 22222",
-  //             correctAnswers: [1, 2, 3],
-  //             allAnswers: [
-  //               {
-  //                 title: 'Так',
-  //                 value: 1
-  //               }
-  //             ]
-  //           },
-  //         ]
-  //       },
-  //     }
-  //   },
-  //   methods: {
-  //     func() {
-  //
-  //       foundKeys++
-  //     }
-  //   }
-  // })
+
+  var t = new Vue({
+    el: '#key',
+    data() {
+      return {
+        foundkeys: 0,
+        answers: [],
+        questions: {
+          s6: [
+            {
+              question: "Чи допоможе автономия",
+              correctAnswers: [1, 2, 3],
+              allAnswers: [
+                {
+                  title: 'Так',
+                  value: 1
+                }
+              ]
+            },
+            {
+              question: " question 22222",
+              correctAnswers: [1, 2, 3],
+              allAnswers: [
+                {
+                  title: 'Так',
+                  value: 1
+                }
+              ]
+            },
+          ]
+        },
+      }
+    },
+    computed: {
+      howFoundKeys() {
+        console.log("comp");
+        return this.foundkeys;
+      }
+    },
+    methods: {
+      func() {
+        console.log("func");
+        this.foundkeys++;
+      }
+    }
+  })
 
 </script>
 </body>
