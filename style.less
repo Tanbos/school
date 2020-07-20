@@ -1,0 +1,47 @@
+.slide {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+@urlImages: url("http://localhost:8080/images/s1_2.png"),
+url("http://localhost:8080/images/s2.png"),
+url("http://localhost:8080/images/s1_2.png"),
+url("http://localhost:8080/images/s1_2.png"),
+url("http://localhost:8080/images/s1_2.png"),
+url("http://localhost:8080/images/s1_2.png"),
+url("http://localhost:8080/images/s1_2.png"),
+url("http://localhost:8080/images/s1_2.png"),
+url("http://localhost:8080/images/s1_2.png"),
+url("http://localhost:8080/images/qs.png"),
+url("http://localhost:8080/images/qs.png"),
+url("http://localhost:8080/images/qs.png"),
+url("http://localhost:8080/images/s1_2.png"),
+url("http://localhost:8080/images/s1_2.png"),
+url("http://localhost:8080/images/s1_2.png"),
+url("http://localhost:8080/images/s1_2.png"),
+url("images/s1_2.png");
+@numberSlides: 13;
+@slides: slide;
+//@url: "url(images/s";
+//@png: ".png)";
+.make-slides(@i:1) when (@i =< @numberSlides) {
+  .@{slides}-@{i} {
+    .slide;
+    @prefix: extract(@urlImages, @i);
+    background-image: @prefix;
+    z-index: @numberSlides - @i;
+  }
+  .make-slides(@i + 1);
+}
+
+.make-slides();
+
+
+
+
