@@ -8,16 +8,18 @@ Vue.component('keys', {
   },
   data() {
     return {
-      urlKey: ['images/key_no.png', 'images/key1.png', 'images/key2.png', 'images/key.png3']
+      urlKey: ['images/key_no.png', 'images/key1.png', 'images/key2.png', 'images/key3.png']
     }
   },
   template: `
   <div>
-  <span>FFFFFFFFFFF HHHHHH </span>
-  <img 
-    v-for="i in 3"
-    :src="foundkeys > 0 ? urlKey[i] : urlKey[0]>
+  <span>Зібрано ключів: {{foundkeys}} </span>
+    <img     :src="urlKey[foundkeys]" height="100px" width="200px"> 
   </div>
+<!--  <img -->
+<!--    v-for="i in 3" -->
+<!--    :src="foundkeys === i ? urlKey[i] : urlKey[0]">-->
+<!--  </div>-->
   `
 })
 
