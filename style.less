@@ -9,39 +9,84 @@
   left: 0;
 }
 
-@urlImages: url("http://localhost:8080/images/s1_2.png"),
-url("http://localhost:8080/images/s2.png"),
-url("http://localhost:8080/images/s1_2.png"),
-url("http://localhost:8080/images/s1_2.png"),
-url("http://localhost:8080/images/s1_2.png"),
-url("http://localhost:8080/images/s1_2.png"),
-url("http://localhost:8080/images/s1_2.png"),
-url("http://localhost:8080/images/s1_2.png"),
-url("http://localhost:8080/images/s1_2.png"),
-url("http://localhost:8080/images/qs.png"),
-url("http://localhost:8080/images/qs.png"),
-url("http://localhost:8080/images/qs.png"),
-url("http://localhost:8080/images/s1_2.png"),
-url("http://localhost:8080/images/s1_2.png"),
-url("http://localhost:8080/images/s1_2.png"),
-url("http://localhost:8080/images/s1_2.png"),
-url("images/s1_2.png");
 @numberSlides: 13;
 @slides: slide;
-//@url: "url(images/s";
-//@png: ".png)";
 .make-slides(@i:1) when (@i =< @numberSlides) {
   .@{slides}-@{i} {
     .slide;
-    @prefix: extract(@urlImages, @i);
-    background-image: @prefix;
-    z-index: @numberSlides - @i;
+    background-image: url("images/s@{i}.png");
+    //z-index: @numberSlides - @i + 1;
   }
   .make-slides(@i + 1);
 }
 
 .make-slides();
 
+.skrynya > div {
+  background-image: url("images/sunduk.png");
+  width: 200px;
+  height: 200px;
+  background-size: 200%;
+}
+
+.skrynya {
+  //background-image: url("images/sunduk.png");
+  display: flex;
+  width: 400px;
+  flex-wrap: wrap;
+}
+
+.skrynya1 {
+  background-position: top left;
+}
+
+.skrynya2 {
+  background-position: top right;
+}
+
+.skrynya3 {
+  background-position: bottom left;
+}
+
+.skrynya4 {
+  background-position: bottom right;
+}
+
+.door {
+  //background-image: url("images/door.png");
+  display: flex;
+  width: 400px;
+  height: 400px;
+  position: center;
+
+}
+
+.door > div {
+  background-image: url("images/door.png");
+  width: 200px;
+  height: 400px;
+  background-size: 200%;
+  transition: 3s linear;
+}
+
+.door-left {
+  background-position: left;
+  //transition: 3s linear;
+}
+
+.doorrightgo {
+  background-position: left;
+  transition: 3s top linear;
+  top: 550px;
+  right: 600px;
+}
+
+.doorright {
+  background-position: right;
+  transition-property: top;
+  transition: right 3s ease;
+  right: 0;
+}
 
 
 

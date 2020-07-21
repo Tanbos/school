@@ -35,86 +35,6 @@
 
     }
 
-    .slide {
-      width: 100vw;
-      height: 100vh;
-      /*background: yellow;*/
-    }
-
-    .slide-11 {
-      background-image: url("images/s1_2.png");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      /*z-index: 2;*/
-    }
-
-    .slide-12 {
-      background-image: url("images/s1_2.png");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      /*z-index: 2;*/
-    }
-
-    /*.slide2 {*/
-    /*. slide;*/
-    /*  background-image: url("images/s2.png");*/
-    /*  background-size: cover;*/
-    /*  background-repeat: no-repeat;*/
-    /*  background-position: center;*/
-    /*  position: fixed;*/
-    /*  top: 0;*/
-    /*  left: 0;*/
-    /*  z-index: 15;*/
-    /*  width: 100vw;*/
-    /*  height: 100vh;*/
-    /*}*/
-
-    /*.slide6 {*/
-    /*  background-image: url('images/sunduk_puzzle.png');*/
-    /*  background-size: cover;*/
-    /*  background-repeat: no-repeat;*/
-    /*  background-position: center;*/
-    /*  position: fixed;*/
-    /*  margin: auto;*/
-    /*  top: 0;*/
-    /*  width: 50vw;*/
-    /*  height: 50vh;*/
-    /*  z-index: 14;*/
-    /*  text-align: center;*/
-    /*}*/
-
-    .slide-puzzle {
-      display: block;
-      margin: auto auto;
-      width: 50%;
-      height: 50%;
-    }
-
-    /*.slide3 {*/
-    /*  background-image: url("images/qs.png");*/
-    /*  background-size: cover;*/
-    /*  background-repeat: no-repeat;*/
-    /*  background-position: center;*/
-    /*  position: fixed;*/
-    /*  top: 0;*/
-    /*  left: 0;*/
-    /*  width: 100vw;*/
-    /*  height: 100vh;*/
-    /*  z-index: 14;*/
-    /*}*/
-
     .next {
       position: fixed;
       bottom: 0;
@@ -161,25 +81,26 @@
     }
   </style>
   <link rel="stylesheet/less" href="./style.less"/>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
 <div id='app'>
   <div class="slides">
-    <div class="slide">
-      <div class="slide-1">
-        1
-      </div>
-    </div>
-    <div class="next">
+    <!--    <div class="slide">-->
+    <div v-if="numberSlides<15" class="next">
       <!--      <button onclick="changeSlide(slide1)">ДАЛІ</button>-->
-      <button class="nextSlide">ДАЛІ</button>
+      <button class="nextSlide" @click="changeSlide">ДАЛІ</button>
 
     </div>
+    <div v-if="numberSlides===1" class="slide-1">
+      1
+    </div>
+    <!--    </div>-->
+
     <!--    <div class="slide">-->
-    <div class="slide-2">
+    <div v-if="numberSlides===2" class="slide-2">
       2
       <!--        <div v-for="q in questions.s6">-->
       <!--          {{q.question}}-->
@@ -194,102 +115,103 @@
       <!--        </div>-->
     </div>
     <!--    </div>-->
-    <div class="slide-3">
+    <div v-if="numberSlides===3" class="slide-3">
       3 Начальниця управління освіти, у якої в голові питання
     </div>
-    <div class="slide-4">
+    <div v-if="numberSlides===4" class="slide-4">
       4
     </div>
-    <div class="slide-5">
+    <div v-if="numberSlides===5" class="slide-5">
       5
+      <button @click="changeSlide" class="exit">Вихід є</button>
+
     </div>
-    <div class="slide-6">
-      6
+    <div v-if="numberSlides===6" class="slide-6">
+      6 Підказка: склади пазл
+      <div class="skrynya">
+        <div @click="selectImage" id="skrynya1" class="skrynya1"></div>
+        <div @click="selectImage" id="skrynya2" class="skrynya3"></div>
+        <div @click="selectImage" id="skrynya3" class="skrynya2">3333</div>
+        <div @click="selectImage" id="skrynya4" class="skrynya4">4444</div>
+      </div>
     </div>
-    <div class="slide-7">
-      7
+    <div v-if="numberSlides===7" class="slide-7">
+      7 Підказка: візьми ключ, відімкни двері
+      <div @click="selectDoor" class="door">
+        <div class="door-left"></div>
+        <div class="doorright"></div>
+      </div>
     </div>
-    <div class="slide-8">
+    <div v-if="numberSlides===8" class="slide-8">
       8
     </div>
-    <div class="slide-9">
+    <div v-if="numberSlides===9" class="slide-9">
       9
     </div>
-    <div class="slide-10">
+    <div v-if="numberSlides===10" class="slide-10">
       10
     </div>
-    <div class="slide-11">
+    <div v-if="numberSlides===11" class="slide-11">
       11
       <div class="admin-school">
-        <img src="https://i.gifer.com/BRDH.gif" height="50px">
+<!--        <img src="https://i.gifer.com/BRDH.gif" height="50px">-->
         <h1 class="fire2">АДМІНІСТРАЦІЯ ШКОЛИ</h1>
-        <img src="https://i.gifer.com/BRDH.gif" height="50px">
+<!--        <img src="https://i.gifer.com/BRDH.gif" height="50px">-->
       </div>
       <br>
-      <p>
-        <label>Чи допоможе фінансова автономія залучити кошти із різних джерел?</label>
-        <br>
-        <label>
-          <input type="radio" name="status" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
-          Так
-        </label>
-        <label>
-          <input type="radio" name="status" value="No" onClick="if(this.checked) CheckRadio('slide3',0);">
-          Ні
-        </label>
-        <label>
-          <input type="radio" name="status" value="nknow" onClick="if(this.checked) CheckRadio('slide3',0);">
-          Не знаю
-        </label>
-      </p>
-      <p>
-        <label>Чи допоможе фінансова автономія залучити кошти із різних джерел?</label>
-        <br>
-        <label>
-          <input type="checkbox" class="status2" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
-          сформувати стратегію розвитку школи на 3-5 років
-        </label>
-        <br>
-        <label>
-          <input type="checkbox" class="status2" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
-          провести конкурс до піклувальних (наглядових) рад
-        </label>
-        <br>
-        <label>
-          <input type="checkbox" class="status2" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
-          налагодити спілкування із громадою
-        </label>
-        <br>
-        <label>
-          <input type="checkbox" class="status2" value="yes" onClick="if(this.checked) CheckRadio('slide3',1);">
-          розказувати про діяльність школи
-        </label>
-      </p>
+<!--      <p>-->
+<!--        <label>Чи допоможе фінансова автономія залучити кошти із різних джерел?</label>-->
+<!--        <br>-->
+<!--        <label>-->
+<!--          <input type="radio" name="status" value="yes" @сlick="if(this.checked) CheckRadio('slide3',1);">-->
+<!--          Так-->
+<!--        </label>-->
+<!--        <label>-->
+<!--          <input type="radio" name="status" value="No" @сlick="if(this.checked) CheckRadio('slide3',0);">-->
+<!--          Ні-->
+<!--        </label>-->
+<!--        <label>-->
+<!--          <input type="radio" name="status" value="nknow" @сlick="if(this.checked) CheckRadio('slide3',0);">-->
+<!--          Не знаю-->
+<!--        </label>-->
+<!--      </p>-->
+<!--      <p>-->
+<!--        <label>Чи допоможе фінансова автономія залучити кошти із різних джерел?</label>-->
+<!--        <br>-->
+<!--        <label>-->
+<!--          <input type="checkbox" class="status2" value="yes" @сlick="if(this.checked) CheckRadio('slide3',1);">-->
+<!--          сформувати стратегію розвитку школи на 3-5 років-->
+<!--        </label>-->
+<!--        <br>-->
+<!--        <label>-->
+<!--          <input type="checkbox" class="status2" value="yes" @сlick="if(this.checked) CheckRadio('slide3',1);">-->
+<!--          провести конкурс до піклувальних (наглядових) рад-->
+<!--        </label>-->
+<!--        <br>-->
+<!--        <label>-->
+<!--          <input type="checkbox" class="status2" value="yes" @сlick="if(this.checked) CheckRadio('slide3',1);">-->
+<!--          налагодити спілкування із громадою-->
+<!--        </label>-->
+<!--        <br>-->
+<!--        <label>-->
+<!--          <input type="checkbox" class="status2" value="yes" @сlick="if(this.checked) CheckRadio('slide3',1);">-->
+<!--          розказувати про діяльність школи-->
+<!--        </label>-->
+<!--      </p>-->
     </div>
-    <div class="slide-12">
+    <div v-if="numberSlides===12" class="slide-12">
       12
     </div>
-    <div class="slide-13">
+    <div v-if="numberSlides===13" class="slide-13">
       13
-    </div>
-    <div class="slide6">
-      <!--      <div class="slide6">-->
-      6
-      <img src='images/sunduk_puzzle.png' class="slide-puzzle">
-      <!--        </div>-->
     </div>
 
     <div class="overlay hidden">
     </div>
-    <div class="slide">
-      <div class="slide3">
-        11
 
-      </div>
-    </div>
 
   </div>
-  <div class="keys" id="key">
+  <div class="keys" id="key" @click="giveKey">
     <keys :foundkeys="howFoundKeys"></keys>
   </div>
 </div>
@@ -297,36 +219,14 @@
 <script src="js/keys.js"></script>
 <script>
   let found = 0;
-  let numberSlide = 1;
   const tempSlide = document.querySelector('.nextSlide');
-  console.log(tempSlide);
-  tempSlide.onclick = function () {
-    changeSlide(tempSlide);
-
-    console.log("number slide " + found);
-    t.func();
-    numberSlide++;
-  };
-
-  function changeSlide(slide) {
-    const tempSlide = document.querySelector(".slide-" + numberSlide);
-    // console.log(tempSlide);
-    tempSlide.classList.add('hidden');
-    const overlay = document.querySelector(".overlay");
-    overlay.classList.remove('hidden');
-    overlay.animate({opacity: "0.1"}, 2000);
-    setTimeout(() => overlay.classList.add('hidden'), 2000);
-  }
-
   let result = 0;
   let boolrez = false;
   let rightAnswers = 5;
 
   function CheckRadio(adress, value) {
     let st2 = document.querySelectorAll('.status2');
-
     for (let i = 0; i < st2.length; i++) {
-
       st2[i].addEventListener('change', function () {
         if (this.checked) {
           console.log('checked')
@@ -347,7 +247,6 @@
       console.log("ok");
       console.log(result);
       console.log(boolrez);
-      console.log(numberSlide);
       changeSlide(adress)
     } else {
       console.log("no");
@@ -358,9 +257,14 @@
 
 
   var t = new Vue({
-    el: '#key',
+    el: '#app',
     data() {
       return {
+        currentKey: 0,
+        useKey: 0,
+        numberSelect: 0,
+        arrayImages: [],
+        numberSlide: 1,
         foundkeys: 0,
         answers: [],
         questions: {
@@ -393,12 +297,84 @@
       howFoundKeys() {
         console.log("comp");
         return this.foundkeys;
+      },
+      numberSlides() {
+        console.log("numberS " + this.numberSlide);
+        return this.numberSlide;
       }
     },
     methods: {
+      changeSlide() {
+        const tempSlide = document.querySelector(".slide-" + this.numberSlide);
+        console.log("change slide");
+        tempSlide.classList.add('hidden');
+        const overlay = document.querySelector(".overlay");
+        overlay.classList.remove('hidden');
+        overlay.animate({opacity: "0.1"}, 2000);
+        setTimeout(() => overlay.classList.add('hidden'), 2000);
+        this.numberSlide++;
+      },
       func() {
         console.log("func");
         this.foundkeys++;
+      },
+      selectImage(e) {
+        console.log("select image");
+        console.log(e.target);
+        console.log(e.target.style);
+        console.log(e.target.id);
+        this.numberSelect++;
+        this.arrayImages.push(e.target.id);
+
+        if (this.numberSelect === 2) {
+          console.log("select 2");
+          this.changeImages();
+          this.numberSelect = 0;
+        } else {
+          alert("вкажіть - з яким елементом поміняти місцями");
+        }
+      },
+      changeImages() {
+        console.log("change images");
+        let el1 = document.getElementById(this.arrayImages[0]);
+        let el2 = document.getElementById(this.arrayImages[1]);
+        console.log(el1);
+        let temp = el1.className;
+        el1.classList.replace(el1.className, el2.className);
+        el2.classList.replace(el2.className, temp);
+        this.arrayImages = [];
+        this.controlSkryni();
+      },
+      controlSkryni() {
+        console.log("control");
+        let control = true;
+        for (let i = 1; i < 4; i++) {
+          let id = "skrynya" + i;
+          let el = document.getElementById(id);
+          if (el.className !== id) {
+            control = false;
+          }
+        }
+        if (control) {
+          this.foundkeys = 1;
+          this.changeSlide();
+        }
+      },
+      giveKey() {
+        console.log("give key");
+        this.useKey++;
+      },
+      selectDoor() {
+        console.log("select door");
+        if (this.useKey > 0) {
+          this.openDoor();
+          this.changeSlide();
+        }
+      },
+      openDoor() {
+        console.log("open door");
+        let temp1 = document.getElementsByClassName('doorright');
+        console.log(temp1);
       }
     }
   })
