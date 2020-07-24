@@ -1,119 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
-
-  <style>
-    .overlay {
-      /*background-image: url(https://i.gifer.com/ZHum.gif);*/
-      /*background-image: url(https://i.gifer.com/3QAe.gif);*/
-      /*background-image: url(https://i.gifer.com/7S3j.gif);*/
-      /*background-image: url(https://i.gifer.com/ZRSm.gif);*/
-      /*background-image: url(https://i.gifer.com/CTM.gif);*/
-      /*background-image: url(https://i.gifer.com/VJC.gif);*/
-      /*background-image: url(https://i.gifer.com/H2HT.gif);*/
-      /*background-image: url(https://i.gifer.com/slt.gif);*/
-      /*background-image: url(https://i.gifer.com/S5Db.gif);*/
-      /*background-image: url(https://i.gifer.com/ySG.gif);*/
-      /*background-image: url(https://i.gifer.com/g0eI.gif);*/
-      /*background-image: url(https://i.gifer.com/t7.gif);*/
-      /*background-image: url(https://i.gifer.com/7S3H.gif);*/
-      /*background-image: url(https://i.gifer.com/GeoX.gif);*/
-      background-image: url(https://i.gifer.com/g0eI.gif);
-
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 19;
-      transition-duration: 2s;
-      transition-delay: 0s, 1s;
-
-    }
-
-    .next {
-      position: fixed;
-      bottom: 0;
-      width: 100vw;
-      text-align: center;
-      z-index: 20;
-      /*display: flex;*/
-    }
-
-    .hidden {
-      display: none;
-      opacity: 0.3;
-    }
-
-    .keys {
-      position: fixed;
-      top: 0;
-      right: 0;
-      display: flex;
-      width: 10%;
-      height: 10%;
-      z-index: 10;
-    }
-
-    .admin-school {
-      display: flex;
-      margin: 0 auto;
-      width: 500px;
-      height: 50px;
-      background: black;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .fire2 {
-      color: #fff;
-      text-shadow: 0 0 2px #eee,
-      0 0 4px #fff,
-      0 -2px 4px #ff3,
-      2px -4px 6px #fd3,
-      -2px -6px 11px #f80,
-      2px -8px 18px #f20;
-      font-size: 20px;
-    }
-  </style>
+  <title>ГРА «ЗНАЙДИ ШКІЛЬНУ СВОЮ ФІНАНСОВУ АВТОНОМІЮ</title>
   <link rel="stylesheet/less" href="./style.less"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
-
 <body>
 <div id='app'>
   <div class="slides">
 
-    <div v-if="numberSlides<15" class="next">
+    <div v-if="numberSlides<14" class="next">
       <button class="nextSlide" @click="changeSlide">ДАЛІ</button>
 
     </div>
     <div v-if="numberSlides===1" class="slide-1">
       1
     </div>
-    <!--    </div>-->
 
-    <!--    <div class="slide">-->
     <div v-if="numberSlides===2" class="slide-2">
       2
-      <!--        <div v-for="q in questions.s6">-->
-      <!--          {{q.question}}-->
-      <!--          <label>-->
-      <!--            <input-->
-      <!--                    type="checkbox"-->
-      <!--                    v-for="a in q.allAnswers"-->
-      <!--                    v-model="answers"-->
-      <!--                    value="a.value"-->
-      <!--                    @change="func"-->
-      <!--            >{{a.title}}</label>-->
-      <!--        </div>-->
     </div>
-    <!--    </div>-->
+
     <div v-if="numberSlides===3" class="slide-3">
       3 Начальниця управління освіти, у якої в голові питання
     </div>
@@ -126,203 +34,232 @@
 
     </div>
     <div v-if="numberSlides===6" class="slide-6">
-      6 Підказка: склади пазл (обери пазли, які потрібно поміняти місцями)
+      6 Підказка: складіть пазл (оберіть пазли, які потрібно поміняти місцями)
       <div class="skrynya">
-        <div @click="selectImage" id="skrynya1" class="skrynya1"></div>
-        <div @click="selectImage" id="skrynya2" class="skrynya3"></div>
-        <div @click="selectImage" id="skrynya3" class="skrynya2">3333</div>
-        <div @click="selectImage" id="skrynya4" class="skrynya4">4444</div>
+        <div @click="selectImage" id="skrynya2" class="skrynya1 top-right"></div>
+        <div @click="selectImage" id="skrynya3" class="skrynya3 bottom-right"></div>
+        <div @click="selectImage" id="skrynya1" class="skrynya4 top-left"></div>
+        <div @click="selectImage" id="skrynya4" class="skrynya2 bottom-left"></div>
       </div>
     </div>
     <div v-if="numberSlides===7" class="slide-7">
-      7 Підказка: візьми ключ, відімкни двері
-      <div @click="selectDoor" class="door">
-        <div class="door-left"></div>
-        <div class="doorright"></div>
+      7 Підказка: візьміть ключ, відімкніть замок
+      <div class="doors">
+        <div class="door door-left"></div>
+        <div class="door door-right"></div>
+        <img src="images/lock.png" @click="selectLock('lock')" class="lock">
       </div>
+
     </div>
     <div v-if="numberSlides===8" class="slide-8">
       8
     </div>
     <div v-if="numberSlides===9" class="slide-9">
-      9
+      9 СМУГА ПЕРЕШКОД
+      <div class="small-blocking">
+        <img src="images/truby.png">
+        <img src="images/fire.png">
+        <img src="images/rock.png">
+      </div>
+
     </div>
     <div v-if="numberSlides===10" class="slide-10">
-      10
-      скеля ЗАСНОВНИК
-      <br>
-      <div v-for="q,qIndex in questions.s10" :key="q.question">
+      <img src="images/rock.png" class="blocking">
+      <div v-for="q,qIndex in questions.s10" :key="q.question" class="test">
         {{q.question}}
         <div v-for="ans,aIndex in q.allAnswers"
              :key="ans.title"
-             :value="ans.value"
              :title="ans.title">
           <label>
-            <input type="checkbox" @change="controlAnswer(qIndex,aIndex)" v-model="ans.value">{{ans.title}}
+            <input type="checkbox"
+                   :value="ans.value"
+                   @change="controlAnswer(qIndex,aIndex,'s10')"
+                   v-model="answers.s10[qIndex]">{{ans.title}}
           </label>
         </div>
       </div>
     </div>
     <div v-if="numberSlides===11" class="slide-11">
-      11
       <div class="admin-school">
-        <!--        <img src="https://i.gifer.com/BRDH.gif" height="50px">-->
-        <h1 class="fire2">АДМІНІСТРАЦІЯ ШКОЛИ</h1>
-        <!--        <img src="https://i.gifer.com/BRDH.gif" height="50px">-->
+        <img v-if="howFoundKeys===1" src="images/fire.gif" height="50px">
+        <h1 class="text-fire">АДМІНІСТРАЦІЯ ШКОЛИ</h1>
+        <img v-if="howFoundKeys===1" src="images/fire.gif" height="50px">
       </div>
-      <br>
-      <!--      <p>-->
-      <!--        <label>Чи допоможе фінансова автономія залучити кошти із різних джерел?</label>-->
-      <!--        <br>-->
-      <!--        <label>-->
-      <!--          <input type="radio" name="status" value="yes" @сlick="if(this.checked) CheckRadio('slide3',1);">-->
-      <!--          Так-->
-      <!--        </label>-->
-      <!--        <label>-->
-      <!--          <input type="radio" name="status" value="No" @сlick="if(this.checked) CheckRadio('slide3',0);">-->
-      <!--          Ні-->
-      <!--        </label>-->
-      <!--        <label>-->
-      <!--          <input type="radio" name="status" value="nknow" @сlick="if(this.checked) CheckRadio('slide3',0);">-->
-      <!--          Не знаю-->
-      <!--        </label>-->
-      <!--      </p>-->
-      <!--      <p>-->
-      <!--        <label>Чи допоможе фінансова автономія залучити кошти із різних джерел?</label>-->
-      <!--        <br>-->
-      <!--        <label>-->
-      <!--          <input type="checkbox" class="status2" value="yes" @сlick="if(this.checked) CheckRadio('slide3',1);">-->
-      <!--          сформувати стратегію розвитку школи на 3-5 років-->
-      <!--        </label>-->
-      <!--        <br>-->
-      <!--        <label>-->
-      <!--          <input type="checkbox" class="status2" value="yes" @сlick="if(this.checked) CheckRadio('slide3',1);">-->
-      <!--          провести конкурс до піклувальних (наглядових) рад-->
-      <!--        </label>-->
-      <!--        <br>-->
-      <!--        <label>-->
-      <!--          <input type="checkbox" class="status2" value="yes" @сlick="if(this.checked) CheckRadio('slide3',1);">-->
-      <!--          налагодити спілкування із громадою-->
-      <!--        </label>-->
-      <!--        <br>-->
-      <!--        <label>-->
-      <!--          <input type="checkbox" class="status2" value="yes" @сlick="if(this.checked) CheckRadio('slide3',1);">-->
-      <!--          розказувати про діяльність школи-->
-      <!--        </label>-->
-      <!--      </p>-->
-    </div>
-    <div v-if="numberSlides===12" class="slide-12">
-      12 труби ГРОШІ
-      <div v-for="q,qIndex in questions.s12" :key="q.question">
+      <div v-for="q,qIndex in questions.s11" :key="q.question" class="test">
         {{q.question}}
         <div v-for="ans,aIndex in q.allAnswers"
              :key="ans.title"
-             :value="ans.value"
              :title="ans.title">
           <label>
-            <input type="checkbox" @change="controlAnswer(qIndex,aIndex)" v-model="ans.value">{{ans.title}}
+            <input type="checkbox"
+                   :value="ans.value"
+                   @change="controlAnswer(qIndex,aIndex,'s11')"
+                   v-model="answers.s11[qIndex]">{{ans.title}}
           </label>
         </div>
       </div>
-    </div>
-    <div v-if="numberSlides===13" class="slide-13">
-      13
+      <div class="blocking">
+        <img src="images/fire.png">
+      </div>
+      <!--      <img src="https://i.gifer.com/9PrD.gif" height="300px" class="fire-left">-->
+      <!--      <img src="images/fire.gif" height="400px" class="fire-right">-->
     </div>
 
+    <div v-if="numberSlides===12" class="slide-12">
+      <div v-for="q,qIndex in questions.s12" :key="q.qIndex" class="test">
+        {{q.question}}
+        <div v-for="ans,aIndex in q.allAnswers"
+             :key="ans.title"
+             :title="ans.title">
+          <label>
+            <input type="checkbox" :value="ans.value" @change="controlAnswer(qIndex,aIndex,'s12')"
+                   v-model="answers.s12[qIndex]">{{ans.title}}
+          </label>
+        </div>
+      </div>
+      <div class="blocking">
+        <img src="images/truby.png">
+      </div>
+    </div>
+    <div v-if="numberSlides===13" class="slide-13">
+      <h1>Відімкніть скриню ключами</h1>
+        <div>
+          <img src="images/sunduk.png">
+          <div class="box">
+            <div>
+              <img src="images/lock.png" @click="selectLock('lock1')" class="lock1">
+            </div>
+            <div>
+              <img src="images/lock.png" @click="selectLock('lock2')" class="lock2">
+            </div>
+            <div>
+              <img src="images/lock.png" @click="selectLock('lock3')" class="lock3">
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <div v-if="numberSlides>13" id="gifts" class="fadeIn">
+      <img src="images/gift.png">
+    </div>
     <div class="overlay hidden">
     </div>
 
-
   </div>
-  <div v-if="numberSlides>6" class="keys" id="key" @click="giveKey">
+  <div v-if="numberSlides>5 && numberSlides<14" class="keys" id="key" @click="giveKey">
     <keys :foundkeys="howFoundKeys"></keys>
   </div>
 </div>
 
 <script src="js/keys.js"></script>
 <script>
-  let found = 0;
-  const tempSlide = document.querySelector('.nextSlide');
-  let result = 0;
-  let boolrez = false;
-  let rightAnswers = 5;
-
-  function CheckRadio(adress, value) {
-    let st2 = document.querySelectorAll('.status2');
-    for (let i = 0; i < st2.length; i++) {
-      st2[i].addEventListener('change', function () {
-        if (this.checked) {
-          console.log('checked')
-        } else console.log('unchecked')
-      });
-    }
-    boolrez = (value === 1);
-    result += value;
-    rezultat(adress);
-  }
-
-  function rez() {
-    return result === rightAnswers;
-  }
-
-  function rezultat(adress) {
-    if (rez() === true) {
-      console.log("ok");
-      console.log(result);
-      console.log(boolrez);
-      changeSlide(adress)
-    } else {
-      console.log("no");
-      console.log(result);
-      console.log(boolrez)
-    }
-  }
 
   const questions = {
 
     s10: [
       {
         question: "1. Хто такий засновник школи?",
-        correctAnswers: [0, 0, true, 0],
+        correctAnswers: [3],
         allAnswers: [
           {
             title: 'директор школи',
-            value: 0
+            value: 1
           },
           {
             title: 'батьківський комітет',
-            value: 0
+            value: 2
           },
           {
             title: 'місцева рада депутатів',
-            value: 0
+            value: 3
           },
           {
             title: 'управління / відділ освіти',
-            value: 0
+            value: 4
           }
         ]
       },
       {
-        question: "Які документи має ухвалити засновник?",
-        correctAnswers: [true, true, 0, 0],
+        question: "2. Які документи має ухвалити засновник?",
+        correctAnswers: [1, 2],
         allAnswers: [
           {
             title: 'рішення про переведення шкіл на фінансову автономію',
-            value: 0
+            value: 1
           },
           {
             title: 'положення про утворення, організацію діяльності та ліквідацію Піклувальних ' +
               '(Наглядових) рад середніх навчальних закладів комунальної форми власності',
-            value: 0
+            value: 2
           },
           {
             title: 'рішення про ведення окремої бухгалтерії у школах',
-            value: 0
+            value: 3
           },
           {
             title: 'рішення про створення комунального підприємства «Піклувальна (Наглядова) рада»',
-            value: 0
+            value: 4
+          }
+        ]
+      },
+    ],
+    s11: [
+      {
+        question: "1. Чи допоможе фінансова автономія залучити кошти із різних джерел?",
+        correctAnswers: [1],
+        allAnswers: [
+          {
+            title: 'так',
+            value: 1
+          },
+          {
+            title: 'ні',
+            value: 2
+          },
+          {
+            title: 'не знаю',
+            value: 3
+          },
+        ]
+      },
+
+      {
+        question: "2. Що робити, щоб фінансова автономія запрацювала?",
+        correctAnswers: [1, 2, 3, 4],
+        allAnswers: [
+          {
+            title: 'сформувати стратегію розвитку школи на 3-5 років',
+            value: 1
+          },
+          {
+            title: 'провести конкурс до піклувальних (наглядових) рад',
+            value: 2
+          },
+          {
+            title: 'налагодити спілкування із громадою',
+            value: 3
+          },
+          {
+            title: 'розказувати про діяльність школи',
+            value: 4
+          },
+        ]
+      },
+      {
+        question: "3. Яка роль піклувальної (наглядової) ради школи?",
+        correctAnswers: [1, 2, 3],
+        allAnswers: [
+          {
+            title: 'допомагати школі писати стратегію розвитку',
+            value: 1
+          },
+          {
+            title: 'допомагати залучати ресурси',
+            value: 2
+          },
+          {
+            title: 'контролювати діяльність адміністрації школи',
+            value: 3
           }
         ]
       },
@@ -330,108 +267,122 @@
     s12: [
       {
         question: "1. Де взяти гроші?",
-        correctAnswers: [true, true, true, true, true,true,true,true,true],
+        correctAnswers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         allAnswers: [
           {
             title: 'державний бюджет',
-            value: 0
+            value: 1
           },
           {
             title: 'місцевий бюджет',
-            value: 0
+            value: 2
           },
           {
             title: 'гранти вітчизняних і міжнародних організацій',
-            value: 0
+            value: 3
           },
           {
             title: 'плата за надання навчальних та інших послуг',
-            value: 0
+            value: 4
           },
           {
             title: 'плата за науково-дослідні роботи',
-            value: 0
+            value: 5
           },
           {
             title: 'доходи від реалізації продукції',
-            value: 0
+            value: 6
           },
           {
             title: 'дивіденди від цінних паперів',
-            value: 0
+            value: 7
           },
           {
             title: 'добровільні внески',
-            value: 0
+            value: 8
           },
           {
             title: 'інші джерела, не заборонені законодавством',
-            value: 0
+            value: 9
           }
         ]
       },
+
       {
-        question: "Які документи має ухвалити засновник?",
-        correctAnswers: [true, true, 0, 0],
+        question: "2. Хто допоможе залучити фінансування?",
+        correctAnswers: [1],
         allAnswers: [
           {
-            title: 'рішення про переведення шкіл на фінансову автономію',
-            value: 0
+            title: 'піклувальна (наглядова) рада',
+            value: 1
           },
           {
-            title: 'положення про утворення, організацію діяльності та ліквідацію Піклувальних ' +
-              '(Наглядових) рад середніх навчальних закладів комунальної форми власності',
-            value: 0
+            title: 'батьки',
+            value: 2
           },
           {
-            title: 'рішення про ведення окремої бухгалтерії у школах',
-            value: 0
+            title: 'батьківські комітети',
+            value: 3
           },
           {
-            title: 'рішення про створення комунального підприємства «Піклувальна (Наглядова) рада»',
-            value: 0
+            title: 'управління освіти',
+            value: 4
+          },
+          {
+            title: 'депутати місцевих рад',
+            value: 5
           }
         ]
       },
-    ]
-  }
+    ],
+  };
 
-  var t = new Vue({
+  let t = new Vue({
     el: '#app',
     data() {
       return {
-        controlSlide: true,
+        controlSlide: false,
         currentKey: 0,
         useKey: 0,
         numberSelect: 0,
         arrayImages: [],
         numberSlide: 1,
         foundkeys: 0,
-        answers: [],
+        answers: {
+          s10: {
+            0: [], 1: []
+          },
+          s11: {
+            0: [], 1: [], 2: []
+          },
+          s12: {
+            0: [], 1: []
+          }
+        },
         questions,
       }
     },
     computed: {
       howFoundKeys() {
-        if (this.foundkeys > 0) alert("Ви знайшли ключ. Можна йти далі");
         return this.foundkeys;
       },
       numberSlides() {
-        // console.log("numberS " + this.numberSlide);
         return this.numberSlide;
       }
     },
     methods: {
       changeSlide() {
-        if ((this.controlSlide && this.numberSlide !== 6) || (this.numberSlide === 6 && this.foundkeys === 1)) {
+        if (this.numberSlide < 6|| (this.controlSlide)  ||
+          // (this.numberSlide === 6 && this.foundkeys === 1)||
+          // (this.numberSlide === 7 && this.foundkeys !== 1)||
+          this.numberSlide === 8 || this.numberSlide === 9) {
           const tempSlide = document.querySelector(".slide-" + this.numberSlide);
-          console.log("change slide");
-          tempSlide.classList.add('hidden');
+          tempSlide.classList.add('hidden-slide');
           const overlay = document.querySelector(".overlay");
           overlay.classList.remove('hidden');
-          overlay.animate({opacity: "0.1"}, 2000);
           setTimeout(() => overlay.classList.add('hidden'), 2000);
           this.numberSlide++;
+          this.controlSlide=false;
         } else {
           if (this.numberSlide > 9) {
             alert("Ви вказали не всі правильні відповіді");
@@ -439,16 +390,15 @@
           if (this.numberSlide === 6) {
             alert("Складіть правильно пазл")
           }
+          if (this.numberSlide === 13) {
+            alert("Щоб відімкнути скриню використайте ключі")
+          }
         }
       },
-      // func() {
-      //   console.log("func");
-      //   this.foundkeys++;
-      // },
+
       selectImage(e) {
         this.numberSelect++;
         this.arrayImages.push(e.target.id);
-
         if (this.numberSelect === 2) {
           this.changeImages();
           this.numberSelect = 0;
@@ -459,53 +409,89 @@
       changeImages() {
         let el1 = document.getElementById(this.arrayImages[0]);
         let el2 = document.getElementById(this.arrayImages[1]);
-        let temp = el1.className;
-        el1.classList.replace(el1.className, el2.className);
-        el2.classList.replace(el2.className, temp);
+        let temp = [...el1.classList].find(e => e.startsWith('skrynya'));
+        let temp2 = [...el2.classList].find(e => e.startsWith('skrynya'));
+        el1.classList.replace(temp, temp2);
+        el2.classList.replace(temp2, temp);
         this.arrayImages = [];
         this.controlSkryni();
       },
       controlSkryni() {
-        console.log("control");
-        // let control = true;
         this.controlSlide = true;
         for (let i = 1; i < 4; i++) {
           let id = "skrynya" + i;
           let el = document.getElementById(id);
-          if (el.className !== id) {
+          if (!el.className.includes(id)) {
             this.controlSlide = false;
           }
         }
         if (this.controlSlide) {
           this.foundkeys = 1;
-          this.changeSlide();
+          setTimeout(() => {
+            alert("Ви знайшли ключ. Можна йти далі");
+            // this.changeSlide();
+          }, 2000);
         }
       },
       giveKey() {
         this.useKey++;
+        // this.foundkeys--;
       },
-      selectDoor() {
-        console.log("select door");
+      selectLock(nameLock) {
+        console.log("select ");
         if (this.useKey > 0) {
-          this.openDoor();
-          this.changeSlide();
-          this.foundkeys = 0;
+          this.openLock(nameLock);
+          if (this.numberSlide === 7) {
+            this.openDoor();
+            alert("Ви відкрили двері. Можна йти далі");
+            this.controlSlide=true;
+          } else {
+            alert("Ви відімкнули замок")
+          }
+          // this.changeSlide();
+          this.foundkeys--;
+          this.useKey--;
+          if (this.numberSlide===13 && this.foundkeys===0) {
+            this.numberSlide=14;
+          }
+        } else {
+          alert("Візьміть ключ");
         }
       },
       openDoor() {
-        let temp1 = document.getElementsByClassName('doorright');
+        let temp1 = document.getElementsByClassName("door");
+        for (let i = 0; i < temp1.length; i++) {
+          temp1[i].classList.add("open");
+        }
       },
-      controlAnswer(index1, index2) {
+      openLock(nameLock) {
+        let lock = document.getElementsByClassName(nameLock);
+        lock[0].classList.add("hidden-lock");
+      },
+      controlAnswer(index1, index2, slideNumber) {
         this.controlSlide = true;
-        for (let k=0; k<questions.s10.length; k++) {
-        for (let i = 0; i < questions.s10[k].correctAnswers.length; i++) {
-          if (questions.s10[k].correctAnswers[i] != questions.s10[k].allAnswers[i].value) {
+        for (let k = 0; k < questions[slideNumber].length; k++) {
+          let arr2 = questions[slideNumber][k].correctAnswers;
+          let arr1 = this.answers[slideNumber][k];
+          if (JSON.stringify(arr1.sort()) !== JSON.stringify(arr2.sort())) {
             this.controlSlide = false;
           }
         }
-      }
-         if (this.controlSlide) {this.foundkeys++}
-      }
+        if (this.controlSlide) {
+          this.foundkeys++;
+          let blocking = document.getElementsByClassName("blocking");
+          blocking[0].classList.add("blocking-out");
+          if (this.numberSlide === 11) {
+            let text = document.querySelector(".text-fire");
+            text.classList.replace("text-fire", "text-without-fire");
+            let blockText = document.getElementsByClassName("admin-school");
+            blockText[0].classList.replace("admin-school", "admin-school-without-fire");
+          }
+          setTimeout(() => {
+            alert("Ви знайшли ключ. Можна йти далі");
+          }, 300);
+        }
+      },
     }
   })
 
