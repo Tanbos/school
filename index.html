@@ -15,6 +15,10 @@
 
     </div>
     <div v-if="numberSlides===1" class="slide-1">
+<!--      <img id="boat" src="images/door.png">-->
+<!--      <img id="rainbow1" src="images/s5.png">-->
+<!--      <img id="rainbow2" src="images/s5.png">-->
+<!--      <img id="rainbow3" src="images/s5.png">-->
     </div>
 
     <div v-if="numberSlides===2" class="slide-2">
@@ -48,31 +52,17 @@
         <div class="doors">
           <div class="door door-left"></div>
           <div class="door door-right"></div>
-          <!--          <img src="images/lock.png" @click="selectLock('lock')" class="lock">-->
         </div>
         <div v-if="controlSlide" class="blocking-hidden">
           <div class="blocking-next">
             <button @click="changeSlide">ДАЛІ</button>
           </div>
         </div>
-
         <img src="images/lock.png" @click="selectLock('lock')" class="lock"></div>
     </div>
-    <!--    <div v-if="numberSlides===8" class="slide-8">-->
-    <!--      8-->
-    <!--    </div>-->
-    <!--    <div v-if="numberSlides===9" class="slide-9">-->
-    <!--      СМУГА ПЕРЕШКОД-->
-    <!--      -->
-    <!--      <div class="small-blocking">-->
-    <!--        <img src="images/truby.png">-->
-    <!--        <img src="images/fire.png">-->
-    <!--        <img src="images/rock.png">-->
-    <!--      </div>-->
-    <!--    </div>-->
     <div v-if="numberSlides===8" class="slide-8">
 
-      <img src="images/rock.png" class="blocking">
+      <img src="images/rock.png" class="blocking" alt="скеля гора">
       <div class="test-block">
         <div v-for="q,qIndex in questions.s10" :key="q.question" class="test">
           {{q.question}}
@@ -91,14 +81,13 @@
     </div>
     <div v-if="numberSlides===9" class="slide-9">
             <div class="blocking">
-              <img src="images/fire.png">
+              <img src="images/fire.png" alt="вогонь">
             </div>
-<!--      <img src="images/fire.png" class="blocking">-->
       <div class="test-block">
         <div class="admin-school">
-          <img v-if="howFoundKeys===1" src="images/fire.gif" height="50px">
+          <img v-if="howFoundKeys===1" src="images/fire.gif" alt="вогонь анімація" height="50px">
           <h1 class="text-fire">АДМІНІСТРАЦІЯ ШКОЛИ</h1>
-          <img v-if="howFoundKeys===1" src="images/fire.gif" height="50px">
+          <img v-if="howFoundKeys===1" src="images/fire.gif" alt="вогонь анімація" height="50px">
         </div>
         <div v-for="q,qIndex in questions.s11" :key="q.question" class="test">
           {{q.question}}
@@ -114,15 +103,10 @@
           </div>
         </div>
       </div>
-      <!--      <div class="blocking">-->
-      <!--        <img src="images/fire.png">-->
-      <!--      </div>-->
-      <!--      <img src="https://i.gifer.com/9PrD.gif" height="300px" class="fire-left">-->
-      <!--      <img src="images/fire.gif" height="400px" class="fire-right">-->
     </div>
 
     <div v-if="numberSlides===10" class="slide-10">
-      <img src="images/truby.png" class="blocking">
+      <img src="images/truby.png" alt="труби" class="blocking">
       <div class="test-block">
         <div v-for="q,qIndex in questions.s12" :key="q.qIndex" class="test">
           {{q.question}}
@@ -135,25 +119,22 @@
             </label>
           </div>
         </div>
-        <!--      <div class="blocking">-->
-        <!--       -->
-        <!--      </div>-->
       </div>
     </div>
 
     <div v-if="numberSlides===11" class="slide-11">
       <h1 class="task">Відкрийте скриню: відімкніть ключами замки </h1>
       <div class="box-all">
-        <img src="images/sunduk.png" style="width: 800px; height: 600px;">
+        <img src="images/sunduk.png" alt="скриня" style="width: 800px; height: 600px;">
         <div class="box">
           <div>
-            <img src="images/lock.png" @click="selectLock('lock1')" class="lock1">
+            <img src="images/lock.png" alt="замок" @click="selectLock('lock1')" class="lock1">
           </div>
           <div>
-            <img src="images/lock.png" @click="selectLock('lock2')" class="lock2">
+            <img src="images/lock.png" alt="замок" @click="selectLock('lock2')" class="lock2">
           </div>
           <div>
-            <img src="images/lock.png" @click="selectLock('lock3')" class="lock3">
+            <img src="images/lock.png" alt="замок" @click="selectLock('lock3')" class="lock3">
           </div>
         </div>
       </div>
@@ -359,7 +340,6 @@
       return {
         controlSlide: false,
         currentKey: 0,
-        useKey: 0,
         usedKey: false,
         numberSelect: 0,
         arrayImages: [],
@@ -396,9 +376,8 @@
           overlay.classList.remove('hidden');
           this.controlSlide = false;
           setTimeout(() => {
-            overlay.classList.add('hidden');
             this.numberSlide++;
-            // this.controlSlide = false;
+            overlay.classList.add('hidden');
           }, 1000);
           const overlay2 = document.querySelector(".overlay");
           overlay2.classList.remove('hidden');
@@ -407,9 +386,6 @@
           if (this.numberSlide > 7 && this.numberSlide < 11) {
             alert("Ви вказали не всі правильні відповіді");
           }
-          // if (this.numberSlide === 11) {
-          //   alert("Щоб відімкнути скриню використайте ключі")
-          // }
         }
       },
 
@@ -420,7 +396,7 @@
         if (this.numberSelect === 2) {
           setTimeout(() => {
             this.changeImages();
-          }, 200);
+          }, 400);
           this.numberSelect = 0;
         }
       },
@@ -454,28 +430,25 @@
         }
       },
       giveKey() {
+        if (this.foundkeys<1) {
+          alert("Ключів немає");
+          return;
+        }
         if (!this.usedKey) {
-          this.useKey++;
           this.usedKey = true;
         }
-        // this.foundkeys--;
       },
       selectLock(nameLock) {
         console.log("select ");
-        if (this.useKey > 0) {
+        if (this.usedKey) {
           this.openLock(nameLock);
           if (this.numberSlide === 7) {
             setTimeout(() => {
               this.openDoor();
             }, 500);
-            // alert("Ви відкрили двері. Можна йти далі");
             this.controlSlide = true;
-            // } else {
-            //   alert("Ви відімкнули замок")
           }
-          // this.changeSlide();
           this.foundkeys--;
-          this.useKey--;
           this.usedKey = false;
           if (this.numberSlide === 11 && this.foundkeys === 0) {
             this.numberSlide = 12;
@@ -519,8 +492,8 @@
           }
           setTimeout(() => {
             alert("Вітаємо! Ви знайшли ключ! Можна йти далі.");
+            this.changeSlide();
           }, 1000);
-          this.changeSlide();
         }
       },
     }
