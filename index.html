@@ -7,18 +7,16 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-<div id='app'>
-  <div class="slides">
+<div id='app' class="board">
 
-    <div v-if="numberSlides<5 || (numberSlides>7 && numberSlides<11)" class="next">
-      <button @click="changeSlide">ДАЛІ</button>
+  <div class="slides">
+    <div v-if="numberSlides<6 || (numberSlide > 7 && this.numberSlide < 11)" class="next" @click="changeSlide">
+      Далі =>
+    </div>
+    <div v-if="numberSlides===0" class="slide-0">
 
     </div>
     <div v-if="numberSlides===1" class="slide-1">
-<!--      <img id="boat" src="images/door.png">-->
-<!--      <img id="rainbow1" src="images/s5.png">-->
-<!--      <img id="rainbow2" src="images/s5.png">-->
-<!--      <img id="rainbow3" src="images/s5.png">-->
     </div>
 
     <div v-if="numberSlides===2" class="slide-2">
@@ -30,7 +28,7 @@
     </div>
 
     <div v-if="numberSlides===5" class="slide-5">
-      <img src="images/exit.png" @click="changeSlide" class="exit" title="Натисніть, щоб пройти далі"></img>
+      <!--      <img src="images/exit.png" @click="changeSlide" class="exit" title="Натисніть, щоб пройти далі"></img>-->
     </div>
 
     <div v-if="numberSlides===6" class="slide-6">
@@ -45,23 +43,21 @@
     <div v-if="numberSlides===7" class="slide-7">
 
       <div class="task"> Завдання: візьміть ключ, відімкніть замок</div>
-      <div v-if="controlSlide" class="blocking-hidden">
-        <h1>Зараз потрібно буде пройти смугу перешкод</h1>
+      <div v-if="controlSlide" class="outside hidden">
+        <div class="task">Зараз потрібно буде пройти смугу перешкод</div>
+        <div class="next" @click="changeSlide">
+          Далі =>
+        </div>
       </div>
       <div class="door-lock">
         <div class="doors">
           <div class="door door-left"></div>
           <div class="door door-right"></div>
         </div>
-        <div v-if="controlSlide" class="blocking-hidden">
-          <div class="blocking-next">
-            <button @click="changeSlide">ДАЛІ</button>
-          </div>
-        </div>
+
         <img src="images/lock.png" @click="selectLock('lock')" class="lock"></div>
     </div>
     <div v-if="numberSlides===8" class="slide-8">
-
       <img src="images/rock.png" class="blocking" alt="скеля гора">
       <div class="test-block">
         <div v-for="q,qIndex in questions.s10" :key="q.question" class="test">
@@ -80,9 +76,9 @@
       </div>
     </div>
     <div v-if="numberSlides===9" class="slide-9">
-            <div class="blocking">
-              <img src="images/fire.png" alt="вогонь">
-            </div>
+      <div class="blocking">
+        <img src="images/fire.png" alt="вогонь">
+      </div>
       <div class="test-block">
         <div class="admin-school">
           <img v-if="howFoundKeys===1" src="images/fire.gif" alt="вогонь анімація" height="50px">
@@ -106,8 +102,9 @@
     </div>
 
     <div v-if="numberSlides===10" class="slide-10">
-      <img src="images/truby.png" alt="труби" class="blocking">
+      <img src="images/pipes.png" alt="труби" class="blocking">
       <div class="test-block">
+        <div class="task">ГРОШІ</div>
         <div v-for="q,qIndex in questions.s12" :key="q.qIndex" class="test">
           {{q.question}}
           <div v-for="ans,aIndex in q.allAnswers"
@@ -146,8 +143,11 @@
     </div>
   </div>
 
-  <div v-if="numberSlides>5 && numberSlides<12" class="keys" id="key" @click="giveKey">
-    <keys :foundkeys="howFoundKeys"></keys>
+
+  <div v-if="numberSlides<12" class="keys">
+    <div class="key hidden" @click="giveKey" id="key1"></div>
+    <div class="key hidden" @click="giveKey" id="key2"></div>
+    <div class="key hidden" @click="giveKey" id="key3"></div>
   </div>
 </div>
 
@@ -343,7 +343,7 @@
         usedKey: false,
         numberSelect: 0,
         arrayImages: [],
-        numberSlide: 1,
+        numberSlide: 0,
         foundkeys: 0,
         answers: {
           s10: {
@@ -423,14 +423,16 @@
         }
         if (this.controlSlide) {
           this.foundkeys = 1;
+          this.visibleKeys();
           setTimeout(() => {
             alert("Вітаємо! Ви знайшли ключ!");
             this.changeSlide();
           }, 2000);
         }
       },
-      giveKey() {
-        if (this.foundkeys<1) {
+      giveKey(e) {
+        e.target.classList.add("selected-key");
+        if (this.foundkeys < 1) {
           alert("Ключів немає");
           return;
         }
@@ -444,7 +446,15 @@
           this.openLock(nameLock);
           if (this.numberSlide === 7) {
             setTimeout(() => {
+              let selectedLock = document.getElementsByClassName(nameLock);
+              selectedLock[0].classList.add('hidden-lock');
+              let selectedKey = document.getElementsByClassName("selected-key");
+              selectedKey[0].classList.replace("selected-key", "hidden");
               this.openDoor();
+              setTimeout(() => {
+                let outside = document.getElementsByClassName('outside');
+                outside[0].classList.remove('hidden');
+              }, 2000);
             }, 500);
             this.controlSlide = true;
           }
@@ -465,11 +475,13 @@
       },
       openLock(nameLock) {
         let lock = document.getElementsByClassName(nameLock);
-        console.log(lock[0]);
+        let selectedKey = document.getElementsByClassName('selected-key');
+        for (let i = 0; i < selectedKey.length; i++) {
+          if (!selectedKey[i].classList.contains('hidden')) {
+            selectedKey[i].classList.add('hidden');
+          }
+        }
         lock[0].src = "images/lock_key.png";
-        setTimeout(() => {
-          lock[0].classList.add('hidden-lock')
-        }, 1000);
       },
       controlAnswer(slideNumber) {
         this.controlSlide = true;
@@ -482,6 +494,7 @@
         }
         if (this.controlSlide) {
           this.foundkeys++;
+          this.visibleKeys();
           let blocking = document.getElementsByClassName("blocking");
           blocking[0].classList.add("blocking-out");
           if (this.numberSlide === 9) {
@@ -493,9 +506,13 @@
           setTimeout(() => {
             alert("Вітаємо! Ви знайшли ключ! Можна йти далі.");
             this.changeSlide();
-          }, 1000);
+          }, 100);
         }
       },
+      visibleKeys() {
+        let keys = document.getElementsByClassName("key");
+        keys[this.foundkeys - 1].classList.remove('hidden');
+      }
     }
   })
 
