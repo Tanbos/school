@@ -1,153 +1,202 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ГРА «ЗНАЙДИ ШКІЛЬНУ СВОЮ ФІНАНСОВУ АВТОНОМІЮ</title>
+  <title>ГРА «ЗНАЙДИ СВОЮ ФІНАНСОВУ АВТОНОМІЮ</title>
   <link rel="stylesheet/less" href="./style.less"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+  <script src="/less.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-<div id='app' class="board">
-
-  <div class="slides">
-    <div v-if="numberSlides<6 || (numberSlide > 7 && this.numberSlide < 11)" class="next" @click="changeSlide">
-      Далі =>
-    </div>
-    <div v-if="numberSlides===0" class="slide-0">
-
-    </div>
-    <div v-if="numberSlides===1" class="slide-1">
-    </div>
-
-    <div v-if="numberSlides===2" class="slide-2">
-    </div>
-
-    <div v-if="numberSlides===3" class="slide-3">
-    </div>
-    <div v-if="numberSlides===4" class="slide-4">
-    </div>
-
-    <div v-if="numberSlides===5" class="slide-5">
-      <!--      <img src="images/exit.png" @click="changeSlide" class="exit" title="Натисніть, щоб пройти далі"></img>-->
-    </div>
-
-    <div v-if="numberSlides===6" class="slide-6">
-      <div class="task"> Завдання: складіть пазл (оберіть пазли, які потрібно поміняти місцями)</div>
-      <div class="skrynya">
-        <div @click="selectImage" id="skrynya2" class="skrynya1 top-right"></div>
-        <div @click="selectImage" id="skrynya3" class="skrynya3 bottom-right"></div>
-        <div @click="selectImage" id="skrynya1" class="skrynya4 top-left"></div>
-        <div @click="selectImage" id="skrynya4" class="skrynya2 bottom-left"></div>
+<div id='app'>
+  <div class="board">
+    <div class="slides">
+      <div v-if="numberSlides>0 && numberSlides<5" class="next"
+           @click="changeSlide">
+        Далі =>
       </div>
-    </div>
-    <div v-if="numberSlides===7" class="slide-7">
-
-      <div class="task"> Завдання: візьміть ключ, відімкніть замок</div>
-      <div v-if="controlSlide" class="outside hidden">
-        <div class="task">Зараз потрібно буде пройти смугу перешкод</div>
-        <div class="next" @click="changeSlide">
-          Далі =>
+      <div v-if="numberSlides===0" class="slide-0">
+        <div class="first-slide">
+          <div>Знайди свою фінансову автономію</div>
+          <div class="start" @click="changeSlide">ПОЧАТИ</div>
         </div>
       </div>
-      <div class="door-lock">
-        <div class="doors">
-          <div class="door door-left"></div>
-          <div class="door door-right"></div>
-        </div>
+      <div v-if="numberSlides===1" class="slide-1">
+      </div>
 
-        <img src="images/lock.png" @click="selectLock('lock')" class="lock"></div>
-    </div>
-    <div v-if="numberSlides===8" class="slide-8">
-      <img src="images/rock.png" class="blocking" alt="скеля гора">
-      <div class="test-block">
-        <div v-for="q,qIndex in questions.s10" :key="q.question" class="test">
-          {{q.question}}
-          <div v-for="ans,aIndex in q.allAnswers"
-               :key="ans.title"
-               :title="ans.title">
-            <label>
-              <input type="checkbox"
-                     :value="ans.value"
-                     @change="controlAnswer('s10')"
-                     v-model="answers.s10[qIndex]">{{ans.title}}
-            </label>
+      <div v-if="numberSlides===2" class="slide-2">
+      </div>
+
+      <div v-if="numberSlides===3" class="slide-3">
+      </div>
+      <div v-if="numberSlides===4" class="slide-4">
+      </div>
+      <div v-if="numberSlides===5" class="slide-5">
+        <div class="puzzle-block">
+          <div class="task-puzzle"> Завдання: складіть пазл</div>
+          <div class="skrynya">
+            <div @click="selectImage" id="skrynya2" class="skrynya1 top-right"></div>
+            <div @click="selectImage" id="skrynya3" class="skrynya3 bottom-right"></div>
+            <div @click="selectImage" id="skrynya1" class="skrynya4 top-left"></div>
+            <div @click="selectImage" id="skrynya4" class="skrynya2 bottom-left"></div>
           </div>
         </div>
       </div>
-    </div>
-    <div v-if="numberSlides===9" class="slide-9">
-      <div class="blocking">
-        <img src="images/fire.png" alt="вогонь">
-      </div>
-      <div class="test-block">
-        <div class="admin-school">
-          <img v-if="howFoundKeys===1" src="images/fire.gif" alt="вогонь анімація" height="50px">
-          <h1 class="text-fire">АДМІНІСТРАЦІЯ ШКОЛИ</h1>
-          <img v-if="howFoundKeys===1" src="images/fire.gif" alt="вогонь анімація" height="50px">
-        </div>
-        <div v-for="q,qIndex in questions.s11" :key="q.question" class="test">
-          {{q.question}}
-          <div v-for="ans,aIndex in q.allAnswers"
-               :key="ans.title"
-               :title="ans.title">
-            <label>
-              <input type="checkbox"
-                     :value="ans.value"
-                     @change="controlAnswer('s11')"
-                     v-model="answers.s11[qIndex]">{{ans.title}}
-            </label>
+      <div v-if="numberSlides===6" class="slide-6">
+        <div class="task" id="task-door"> Завдання: візьміть ключ, відімкніть замок</div>
+        <div v-if="controlSlide" class="outside hidden">
+          <div class="task">Зараз потрібно буде пройти смугу перешкод</div>
+          <div class="exit" @click="changeSlide">
+            Далі =>
           </div>
         </div>
+        <div class="door-lock">
+          <div class="doors">
+            <div class="door door-left"></div>
+            <div class="door door-right"></div>
+          </div>
+          <img src="images/lock.png" @click="selectLock('lock')" class="lock"></div>
+      </div>
+      <div v-if="numberSlides===7" class="slide-7">
+        <img src="images/rock.png" class="blocking" alt="скеля гора">
+        <div class="test-block">
+          <div v-for="q,qIndex in questions.s10" :key="q.question" class="test">
+            {{q.question}}
+            <div v-for="ans,aIndex in q.allAnswers"
+                 :key="ans.title"
+                 :title="ans.title">
+              <label>
+                <input type="checkbox"
+                       :value="ans.value"
+                       @change="controlAnswer('s10')"
+                       v-model="answers.s10[qIndex]">{{ans.title}}
+              </label>
+            </div>
+          </div>
+          <div class="exit" :class="{unValid: isNotRight}" @click="changeSlide">
+            Далі =>
+          </div>
+        </div>
+      </div>
+      <div v-if="numberSlides===8" class="slide-8">
+        <div class="blocking">
+        </div>
+        <div class="test-block">
+          <h4 class="text-fire">АДМІНІСТРАЦІЯ ШКОЛИ</h4>
+          <div v-for="q,qIndex in questions.s11" :key="q.question" class="test">
+            {{q.question}}
+            <div v-for="ans,aIndex in q.allAnswers"
+                 :key="ans.title"
+                 :title="ans.title">
+              <label>
+                <input type="checkbox"
+                       :value="ans.value"
+                       @change="controlAnswer('s11')"
+                       v-model="answers.s11[qIndex]">{{ans.title}}
+              </label>
+            </div>
+          </div>
+          <div class="exit" :class="{unValid: isNotRight}" @click="changeSlide">
+            Далі =>
+          </div>
+        </div>
+        <svg class="fire-icon fire-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74 74">
+          <path d="M38.4,72a22.488,22.488,0,0,
+                  1-7.762-1.351h0c-8.918-3.269-14.867-8.417-17.68-15.3-4.617-11.3.865-23.076,
+                  1.1-23.571a1,1,0,0,1,1.867.161,13.173,13.173,0,0,0,4.1,5.836c2.289-11.488,
+                  12.31-18.44,12.755-18.745,6.466-5.176,1.185-15.46,1.131-15.563a1,1,0,0,1,
+                  1.515-1.241C53.233,16.676,52.209,31.23,50.772,37.21A9.7,9.7,0,0,0,54.4,28.236a1,
+                  1,0,0,1,1.818-.7,45.31,45.31,0,0,1,4.674,9.623A27.328,27.328,0,0,1,
+                  56.2,63.527l-.214.261A22.7,22.7,0,0,1,38.4,72Zm-7.074-3.229A20.492,20.492,
+                  0,0,0,38.4,70,20.71,20.71,0,0,0,54.44,62.516l.2-.25A25.34,25.34,0,0,0,59,37.821a45.333,
+                  45.333,0,0,0-2.688-6.149c-1.1,6.017-6.857,8.815-6.927,8.848a1,1,0,0,1-1.332-1.331c.316-.678,
+                  7.2-16.1-10.92-32.841,1.156,4.007,1.847,10.274-3.171,14.288-.167.118-10.787,7.506-12.237,
+                  19.1a1,1,0,0,1-1.554.7A18.559,18.559,0,0,1,15,34.859C13.687,38.7,11.659,46.9,14.814,54.6c2.594,
+                  6.335,8.149,11.1,16.511,14.166Z"/>
+          <path d="M34.139,71.592a1,1,0,0,1-.644-.235C20.752,
+                  60.615,29.73,46.878,29.822,46.741a1,1,0,0,1,1.829.494,6.707,6.707,0,0,0,1.56,4.191,20.323,
+                  20.323,0,0,1,8.815-19.648A1,1,0,0,1,43.418,33.1a6.942,6.942,0,0,0-.806,3.385,7.34,7.34,0,0,0,
+                  1.256,3.837l.4.611a62.7,62.7,0,0,0,4.3,5.662,17.628,17.628,0,0,1,2.839,4.833c5.012,10.333-3.6,
+                  18.478-3.684,18.56a1,1,0,0,1-1.36-1.466c.313-.292,7.625-7.26,3.223-16.265a.966.966,0,0,
+                  1-.045-.109,15.726,15.726,0,0,0-2.512-4.275,64.528,64.528,0,0,1-4.437-5.845l-.4-.611a9.341,9.341,0,0,
+                  1-1.582-4.89,9,9,0,0,1,.052-1.167c-2.88,2.723-7.1,8.52-5.11,18a1,1,0,0,1-1.269,
+                1.163,6.829,6.829,0,0,1-4.06-4.287c-1.774,4.04-3.9,12.461,4.559,19.594a1,1,0,0,1-.645,1.765Z"/>
+        </svg>
+        <svg class="fire-icon fire-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74 74">
+          <path d="M38.4,72a22.488,22.488,0,0,
+                  1-7.762-1.351h0c-8.918-3.269-14.867-8.417-17.68-15.3-4.617-11.3.865-23.076,
+                  1.1-23.571a1,1,0,0,1,1.867.161,13.173,13.173,0,0,0,4.1,5.836c2.289-11.488,
+                  12.31-18.44,12.755-18.745,6.466-5.176,1.185-15.46,1.131-15.563a1,1,0,0,1,
+                  1.515-1.241C53.233,16.676,52.209,31.23,50.772,37.21A9.7,9.7,0,0,0,54.4,28.236a1,
+                  1,0,0,1,1.818-.7,45.31,45.31,0,0,1,4.674,9.623A27.328,27.328,0,0,1,
+                  56.2,63.527l-.214.261A22.7,22.7,0,0,1,38.4,72Zm-7.074-3.229A20.492,20.492,
+                  0,0,0,38.4,70,20.71,20.71,0,0,0,54.44,62.516l.2-.25A25.34,25.34,0,0,0,59,37.821a45.333,
+                  45.333,0,0,0-2.688-6.149c-1.1,6.017-6.857,8.815-6.927,8.848a1,1,0,0,1-1.332-1.331c.316-.678,
+                  7.2-16.1-10.92-32.841,1.156,4.007,1.847,10.274-3.171,14.288-.167.118-10.787,7.506-12.237,
+                  19.1a1,1,0,0,1-1.554.7A18.559,18.559,0,0,1,15,34.859C13.687,38.7,11.659,46.9,14.814,54.6c2.594,
+                  6.335,8.149,11.1,16.511,14.166Z"/>
+          <path d="M34.139,71.592a1,1,0,0,1-.644-.235C20.752,
+                  60.615,29.73,46.878,29.822,46.741a1,1,0,0,1,1.829.494,6.707,6.707,0,0,0,1.56,4.191,20.323,
+                  20.323,0,0,1,8.815-19.648A1,1,0,0,1,43.418,33.1a6.942,6.942,0,0,0-.806,3.385,7.34,7.34,0,0,0,
+                  1.256,3.837l.4.611a62.7,62.7,0,0,0,4.3,5.662,17.628,17.628,0,0,1,2.839,4.833c5.012,10.333-3.6,
+                  18.478-3.684,18.56a1,1,0,0,1-1.36-1.466c.313-.292,7.625-7.26,3.223-16.265a.966.966,0,0,
+                  1-.045-.109,15.726,15.726,0,0,0-2.512-4.275,64.528,64.528,0,0,1-4.437-5.845l-.4-.611a9.341,9.341,0,0,
+                  1-1.582-4.89,9,9,0,0,1,.052-1.167c-2.88,2.723-7.1,8.52-5.11,18a1,1,0,0,1-1.269,
+                1.163,6.829,6.829,0,0,1-4.06-4.287c-1.774,4.04-3.9,12.461,4.559,19.594a1,1,0,0,1-.645,1.765Z"/>
+        </svg>
+      </div>
+
+      <div v-if="numberSlides===9" class="slide-9">
+        <img src="images/pipes.png" alt="труби" class="blocking">
+        <div class="test-block">
+          <div class="task">ГРОШІ</div>
+          <div v-for="q,qIndex in questions.s12" :key="q.qIndex" class="test">
+            {{q.question}}
+            <div v-for="ans,aIndex in q.allAnswers"
+                 :key="ans.title"
+                 :title="ans.title">
+              <label>
+                <input type="checkbox" :value="ans.value" @change="controlAnswer('s12')"
+                       v-model="answers.s12[qIndex]">{{ans.title}}
+              </label>
+            </div>
+          </div>
+          <div class="exit" :class="{unValid: isNotRight}" @click="changeSlide">
+            Далі =>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="numberSlides===10" class="slide-10">
+        <div class="task">Відкрийте скриню: відімкніть ключами замки</div>
+        <div class="box-all">
+          <div class="box">
+            <div>
+              <img src="images/lock.png" alt="замок" @click="selectLock('lock1')" class="lock1">
+            </div>
+            <div>
+              <img src="images/lock.png" alt="замок" @click="selectLock('lock2')" class="lock2">
+            </div>
+            <div>
+              <img src="images/lock.png" alt="замок" @click="selectLock('lock3')" class="lock3">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="numberSlides>10" id="gifts" class="fadeIn">
       </div>
     </div>
 
-    <div v-if="numberSlides===10" class="slide-10">
-      <img src="images/pipes.png" alt="труби" class="blocking">
-      <div class="test-block">
-        <div class="task">ГРОШІ</div>
-        <div v-for="q,qIndex in questions.s12" :key="q.qIndex" class="test">
-          {{q.question}}
-          <div v-for="ans,aIndex in q.allAnswers"
-               :key="ans.title"
-               :title="ans.title">
-            <label>
-              <input type="checkbox" :value="ans.value" @change="controlAnswer('s12')"
-                     v-model="answers.s12[qIndex]">{{ans.title}}
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="numberSlides===11" class="slide-11">
-      <h1 class="task">Відкрийте скриню: відімкніть ключами замки </h1>
-      <div class="box-all">
-        <img src="images/sunduk.png" alt="скриня" style="width: 800px; height: 600px;">
-        <div class="box">
-          <div>
-            <img src="images/lock.png" alt="замок" @click="selectLock('lock1')" class="lock1">
-          </div>
-          <div>
-            <img src="images/lock.png" alt="замок" @click="selectLock('lock2')" class="lock2">
-          </div>
-          <div>
-            <img src="images/lock.png" alt="замок" @click="selectLock('lock3')" class="lock3">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="numberSlides>11" id="gifts" class="fadeIn">
-    </div>
-    <div class="overlay hidden">
+    <div class="keys">
+      <div class="key hidden" @click="giveKey" id="key1"></div>
+      <div class="key hidden" @click="giveKey" id="key2"></div>
+      <div class="key hidden" @click="giveKey" id="key3"></div>
     </div>
   </div>
-
-
-  <div v-if="numberSlides<12" class="keys">
-    <div class="key hidden" @click="giveKey" id="key1"></div>
-    <div class="key hidden" @click="giveKey" id="key2"></div>
-    <div class="key hidden" @click="giveKey" id="key3"></div>
+  <div class="footer">
+    <div>© 2020, <a href="https://www.facebook.com/samoorg.krop">КОО ВГО "Асоціація сприяння самоорганізації
+      населення"</a></div>
+    <div><a href="license.html">Ліцензії</a></div>
+    <div>Зроблено з любов’ю від <a href="https://programming.kr.ua/ua">Ш++</a></div>
   </div>
 </div>
 
@@ -340,6 +389,7 @@
       return {
         controlSlide: false,
         currentKey: 0,
+        numberTest: 0,
         usedKey: false,
         numberSelect: 0,
         arrayImages: [],
@@ -365,27 +415,23 @@
       },
       numberSlides() {
         return this.numberSlide;
+      },
+      isNotRight() {
+        return !this.controlSlide;
       }
     },
     methods: {
       changeSlide() {
-        if (this.numberSlide < 6 || (this.controlSlide)) {
+        if (this.numberSlide < 5 || (this.controlSlide)) {
+          if (this.numberSlide > 6) {
+            this.numberTest++;
+          }
           const tempSlide = document.querySelector(".slide-" + this.numberSlide);
           tempSlide.classList.add('hidden-slide');
-          const overlay = document.querySelector(".overlay");
-          overlay.classList.remove('hidden');
           this.controlSlide = false;
           setTimeout(() => {
             this.numberSlide++;
-            overlay.classList.add('hidden');
           }, 1000);
-          const overlay2 = document.querySelector(".overlay");
-          overlay2.classList.remove('hidden');
-          setTimeout(() => overlay2.classList.add('hidden'), 1000);
-        } else {
-          if (this.numberSlide > 7 && this.numberSlide < 11) {
-            alert("Ви вказали не всі правильні відповіді");
-          }
         }
       },
 
@@ -424,16 +470,16 @@
         if (this.controlSlide) {
           this.foundkeys = 1;
           this.visibleKeys();
+          let puzzle = document.getElementsByClassName('puzzle-block');
+          puzzle[0].classList.add('hidden-puzzle');
           setTimeout(() => {
-            alert("Вітаємо! Ви знайшли ключ!");
             this.changeSlide();
-          }, 2000);
+          }, 4000);
         }
       },
       giveKey(e) {
         e.target.classList.add("selected-key");
         if (this.foundkeys < 1) {
-          alert("Ключів немає");
           return;
         }
         if (!this.usedKey) {
@@ -444,27 +490,30 @@
         console.log("select ");
         if (this.usedKey) {
           this.openLock(nameLock);
-          if (this.numberSlide === 7) {
+          if (this.numberSlide === 6) {
             setTimeout(() => {
               let selectedLock = document.getElementsByClassName(nameLock);
               selectedLock[0].classList.add('hidden-lock');
               let selectedKey = document.getElementsByClassName("selected-key");
               selectedKey[0].classList.replace("selected-key", "hidden");
               this.openDoor();
+              const task = document.getElementById('task-door');
+              task.classList.add("hidden");
               setTimeout(() => {
                 let outside = document.getElementsByClassName('outside');
                 outside[0].classList.remove('hidden');
-              }, 2000);
-            }, 500);
+                let door = document.getElementsByClassName('door-lock');
+                door[0].classList.add("hidden");
+                door[0].classList.add("hidden-lock");
+              }, 1000);
+            }, 2000);
             this.controlSlide = true;
           }
           this.foundkeys--;
           this.usedKey = false;
-          if (this.numberSlide === 11 && this.foundkeys === 0) {
-            this.numberSlide = 12;
+          if (this.numberSlide === 10 && this.foundkeys === 0) {
+            this.numberSlide = 11;
           }
-        } else {
-          alert("Спочатку візьміть ключ");
         }
       },
       openDoor() {
@@ -493,26 +542,27 @@
           }
         }
         if (this.controlSlide) {
-          this.foundkeys++;
-          this.visibleKeys();
-          let blocking = document.getElementsByClassName("blocking");
-          blocking[0].classList.add("blocking-out");
-          if (this.numberSlide === 9) {
-            let text = document.querySelector(".text-fire");
-            text.classList.replace("text-fire", "text-without-fire");
-            let blockText = document.getElementsByClassName("admin-school");
-            blockText[0].classList.replace("admin-school", "admin-school-without-fire");
+          if (this.numberTest === this.foundkeys) {
+            this.foundkeys++;
+            this.visibleKeys();
+            let blocking = document.getElementsByClassName("blocking");
+            blocking[0].classList.add("blocking-out");
+            if (this.numberSlide === 8) {
+              let fires = document.getElementsByClassName("fire-icon");
+              for (let i = 0; i < fires.length; i++) {
+                fires[i].classList.add("blocking-out");
+              }
+              let text = document.querySelector(".text-fire");
+              text.classList.replace("text-fire", "text-without-fire");
+            }
           }
-          setTimeout(() => {
-            alert("Вітаємо! Ви знайшли ключ! Можна йти далі.");
-            this.changeSlide();
-          }, 100);
         }
+
       },
       visibleKeys() {
         let keys = document.getElementsByClassName("key");
         keys[this.foundkeys - 1].classList.remove('hidden');
-      }
+      },
     }
   })
 
