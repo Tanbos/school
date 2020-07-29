@@ -200,7 +200,6 @@
   </div>
 </div>
 
-<script src="js/keys.js"></script>
 <script>
 
   const questions = {
@@ -393,6 +392,7 @@
         usedKey: false,
         numberSelect: 0,
         arrayImages: [],
+        arrayKeys: [],
         numberSlide: 0,
         foundkeys: 0,
         answers: {
@@ -478,12 +478,16 @@
         }
       },
       giveKey(e) {
-        e.target.classList.add("selected-key");
-        if (this.foundkeys < 1) {
-          return;
-        }
-        if (!this.usedKey) {
-          this.usedKey = true;
+        let key = e.target.id;
+        if (this.arrayKeys.indexOf(key) === -1) {
+          this.arrayKeys.push(e.target.id);
+          e.target.classList.add("selected-key");
+          if (this.foundkeys < 1) {
+            return;
+          }
+          if (!this.usedKey) {
+            this.usedKey = true;
+          }
         }
       },
       selectLock(nameLock) {
@@ -497,16 +501,20 @@
               let selectedKey = document.getElementsByClassName("selected-key");
               selectedKey[0].classList.replace("selected-key", "hidden");
               this.openDoor();
+              this.arrayKeys = [];
               const task = document.getElementById('task-door');
               task.classList.add("hidden");
               setTimeout(() => {
-                let outside = document.getElementsByClassName('outside');
-                outside[0].classList.remove('hidden');
+
                 let door = document.getElementsByClassName('door-lock');
                 door[0].classList.add("hidden");
-                door[0].classList.add("hidden-lock");
-              }, 1000);
-            }, 2000);
+                setTimeout(() => {
+                  door[0].classList.add("hidden-lock");
+                  let outside = document.getElementsByClassName('outside');
+                  outside[0].classList.remove('hidden');
+                }, 500);
+              }, 500);
+            }, 1000);
             this.controlSlide = true;
           }
           this.foundkeys--;
