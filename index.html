@@ -515,7 +515,9 @@
           const tempSlide = document.querySelector(".slide-" + this.numberSlide);
           tempSlide.classList.add('hidden-slide');
           this.controlSlide = false;
-          this.numberSlide++;
+          this.numberSlide < 5 ? setTimeout(() => {
+            this.numberSlide++;
+          }, 1000) : this.numberSlide++;
         } else {
           if (this.numberSlide === 5) {
             this.puzzleStatus = true;
