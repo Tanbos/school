@@ -176,7 +176,6 @@
           <div class="exit" :class="{unValid: isNotRight}" @click="changeQuestion('s11','q112')">
             ДАЛІ ->
           </div>
-          <!--          </div>-->
         </div>
         <div v-if="numberCurrentQuestion===3" class="test-block" id="q11-3">
           {{questions.s11[2].question}}
@@ -252,13 +251,13 @@
           </div>
         </div>
       </div>
+
       <div v-if="numberSlides>10" id="gifts" class="fadeIn">
         <div class="last-slide fadeInText">Вітаємо!
           <br>
           Ви зробили перший крок на шляху до фінансової автономії
         </div>
       </div>
-
     </div>
 
     <div class="keys">
